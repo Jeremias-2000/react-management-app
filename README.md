@@ -2,8 +2,7 @@
 
 ## 🚀 Overview
 
-<img src="https://github.com/Jeremias-2000/react-management-app/blob/master/src/assets/img/visual%20do%20dashboard.png?w=12"
-     height="150" width=" 150">
+<img src="https://github.com/Jeremias-2000/react-management-app/blob/master/src/assets/img/visual%20do%20dashboard.png?w=12">
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
