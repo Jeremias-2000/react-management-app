@@ -12,7 +12,7 @@ import UsuarioEditar from './pages/admin/usuarios/usuarios.editar';
 
 import Home from './pages/client/home';
 import LivrosDetails
- from './pages/client/produtos/livros.details';
+ from './pages/client/livros/livros.details';
 
  export default function Routes() {
      return(
