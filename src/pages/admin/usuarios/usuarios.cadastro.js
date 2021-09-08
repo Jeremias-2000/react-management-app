@@ -14,6 +14,7 @@ import MenuAdmin from '../../../components/menu.admin';
 import Footer from "../../../components/footer.admin";
 import PersonAddIcon from '@material-ui/icons/PersonAdd'; 
 
+import connection from '../../../services/user-api-connection';
 
 
 
@@ -56,6 +57,34 @@ export default function UsuarioCadastro() {
  const [houseNumber,setHouseNumber] = useState('');
 
 
+ async function handleSubmit(){
+
+    const address= {cep: cep,
+                    state: state,
+                    city: city,
+                    district: district,
+                    road: road,
+                    houseNumber: houseNumber}
+                    
+    const data = {username: username
+                ,birthDay: birthDay
+                ,password: password
+                ,email:email,
+                cpf: cpf,
+                address: address}
+
+                console.log(data)   
+                
+        const response = await connection.post('/auth/signup',data); 
+        if(response.status === 200){
+          window.location.href= 'http://localhost:3000/admin/usuarios'
+        }else{
+          alert('Erro ao cadastrar novo usuário !');
+        } 
+  }
+  
+
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -66,22 +95,22 @@ export default function UsuarioCadastro() {
         <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
           <Grid item sm={12}>
-          <Paper className={classes.paper} >
-            <h2>Cadastro de Usuário</h2>
+              <Paper className={classes.paper} >
+                <h2>Cadastro de Usuário</h2>
             
-          <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
-          <TextField
-            required
-            id="username"
-            name="username"
-            label="Nome Completo"
-            fullWidth
-            autoComplete="username"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-        </Grid>
+                <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  id="username"
+                   name="username"
+                    label="Nome Completo"
+                    fullWidth
+                    autoComplete="username"
+                    value={username}
+                  onChange={e => setUsername(e.target.value)}
+                />
+              </Grid>
 
         <Grid item xs={12} sm={3}>
         <form >
@@ -97,7 +126,7 @@ export default function UsuarioCadastro() {
               }}
               fullWidth
               /**esta dando erro quando coloco uma data */
-              
+              autoComplete="birthDay"
               value={birthDay}
               onChange={e => setBirthDay(e.target.value)}
                />
@@ -218,19 +247,20 @@ export default function UsuarioCadastro() {
         </Grid>
         
         <Grid item xs={12} sm={12}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            className={classes.button}
-            startIcon={<PersonAddIcon />}
+                  <Button
+                      variant="contained"
+                      onClick={handleSubmit()}
+                      color="primary"
+                      size="small"
+                      className={classes.button}
+                      startIcon={<PersonAddIcon />}
                
-          >    
-            Save  
-          </Button>
-        </Grid>
+                      >    
+                    Save  
+                  </Button>
+               </Grid>
 
-        </Grid>
+             </Grid>
           </Paper>
           </Grid>
             
