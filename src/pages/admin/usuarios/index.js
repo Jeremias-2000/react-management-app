@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-
+/* import axios from 'axios'; */
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import  Paper  from '@material-ui/core/Paper';
@@ -11,14 +11,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import  ButtonGroup  from '@material-ui/core/ButtonGroup';
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import MenuAdmin from '../../../components/menu.admin';
 import Footer from "../../../components/footer.admin";
-import userApi from '../../../services/user-api-connection';
+ import userApi from '../../../services/user-api-connection'; 
 
 
 
@@ -49,15 +49,30 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-export default function UsuarioListagem() {
+export default function UsuarioListagem()  {
   const classes = useStyles();
+  
  const [users,setUsers] = useState([]);
-  useEffect(() =>{
-      async function listarUsuarios(){
-        const response = await userApi.get('/user/all');
-        console.log(response);
-      }
-  },[])
+
+
+ useEffect(() =>{
+   async function loadUsers(){
+     const response = await userApi.get("/user/all")
+    
+     setUsers([users, response.data])
+     console.log(response.data)
+   }
+   loadUsers();
+   
+ },[])
+  /* useEffect(() =>{
+      axios.get('http://localhost:8080/api/v1/user/all')
+      .then(response => {
+        setUsers(response.data)
+        
+      }).catch(error => console.log(error))
+  },[]) */
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -77,7 +92,8 @@ export default function UsuarioListagem() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Nome</TableCell>
+            <TableCell>Id</TableCell>
+            <TableCell align="right">Nome</TableCell>
             <TableCell align="right">Data de Aniversário</TableCell>
             <TableCell align="right">Password</TableCell>
             <TableCell align="right">Email</TableCell>
@@ -91,18 +107,30 @@ export default function UsuarioListagem() {
             <TableCell align="right">Opções</TableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
-          {/* {rows.map((row) => (
-            <TableRow key={row.name}>
+
+           {users.map((user) => (
+            <TableRow key={user.userId}>
               <TableCell component="th" scope="row">
-                {row.name}
+                  {user.userId}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell >{user.username}</TableCell>
+              <TableCell >{user.birthDay}</TableCell>
+              <TableCell >{user.password}</TableCell>
+              <TableCell >{user.email}</TableCell>
+              <TableCell >{user.cpf}</TableCell>
+              <TableCell >{user.cep}</TableCell>
+              <TableCell >{user.state}</TableCell>
+              <TableCell >{user.city}</TableCell>
+              <TableCell >{user.district}</TableCell>
+              <TableCell >{user.road}</TableCell>
+              <TableCell >{user.houseNumber}</TableCell>
+              <ButtonGroup> Atualizar</ButtonGroup>
+              <ButtonGroup> Deletar</ButtonGroup>
             </TableRow>
-          ))} */}
+          ))}
+
         </TableBody>
       </Table>
     </TableContainer>
@@ -119,5 +147,5 @@ export default function UsuarioListagem() {
       </main>
     </div>
   );
-}
+};
 
