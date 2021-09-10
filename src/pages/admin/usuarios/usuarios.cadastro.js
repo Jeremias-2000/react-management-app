@@ -76,6 +76,7 @@ export default function UsuarioCadastro() {
                 console.log(data)   
                 
         const response = await connection.post('/auth/signup',data); 
+        console.log(response.data)
         if(response.status === 200){
           window.location.href= 'http://localhost:3000/admin/usuarios'
         }else{
