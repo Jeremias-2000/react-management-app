@@ -6,7 +6,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-
+import { Link} from 'react-router-dom';
 import ExitToApp from '@material-ui/icons/ExitToApp';
 
 export const mainListItems = (
@@ -39,12 +39,13 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Opções</ListSubheader>
+    <Link  to= "/">
     <ListItem button>
       <ListItemIcon>
         <ExitToApp />
       </ListItemIcon>
       <ListItemText primary="Sair" />
     </ListItem>
-    
+    </Link>
   </div>
 );
