@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React,{useState,useEffect} from 'react';
+/* import axios from 'axios'; */
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import  Paper  from '@material-ui/core/Paper';
@@ -11,14 +11,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import  ButtonGroup  from '@material-ui/core/ButtonGroup';
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import MenuAdmin from '../../../components/menu.admin';
 import Footer from "../../../components/footer.admin";
-
+ import userApi from '../../../services/user-api-connection'; 
 
 
 
@@ -48,33 +48,45 @@ const useStyles = makeStyles((theme) => ({
   },
   
 }));
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-export default function LivrosListagem() {
-  const classes = useStyles();
- 
-  
 
+export default function LivrosListagem()  {
+  const classes = useStyles();
+  
+ const [books,setBooks] = useState([]);
+
+
+ useEffect(() =>{
+   async function loadBooks(){
+     const response = await userApi.get("/book/all")
+    
+     setBooks([books, response.data])
+     console.log(response.data)
+   }
+   loadBooks();
+   
+ },[])
+  /* useEffect(() =>{
+      axios.get('http://localhost:8080/api/v1/user/all')
+      .then(response => {
+        setUsers(response.data)
+        
+      }).catch(error => console.log(error))
+  },[]) */
+ 
+
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
       
-      <MenuAdmin title={'Livros'}/>
+      <MenuAdmin title={'Usuários'}/>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
           <Grid item sm={12}>
           <Paper className={classes.paper} >
-            <h2>Listagem de Livros</h2>
+            <h2>Listagem de Usuários</h2>
             
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12}>
@@ -82,26 +94,34 @@ export default function LivrosListagem() {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Nome</TableCell>
-            <TableCell align="right">Data </TableCell>
+            <TableCell>Id</TableCell>
+            <TableCell align="right">Nome</TableCell>
+            <TableCell align="right">Autor</TableCell>
             <TableCell align="right">Gênero</TableCell>
+            <TableCell align="right">Preço</TableCell>
             <TableCell align="right">Quantidade</TableCell>
-            <TableCell align="right">Páginas</TableCell>
-            
           </TableRow>
         </TableHead>
+
+        
         <TableBody>
-          {/* {rows.map((row) => (
-            <TableRow key={row.name}>
+        
+           {books.map((book) => (
+            <TableRow key={book.bookId} >
               <TableCell component="th" scope="row">
-                {row.name}
+                  {book.bookId}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              
+              <TableCell >{book.name}</TableCell>
+              <TableCell >{book.author}</TableCell>
+              <TableCell >{book.genre}</TableCell>
+              <TableCell >{book.price}</TableCell>
+              <TableCell >{book.quantity}</TableCell>
+
+              <ButtonGroup>Atualizar</ButtonGroup>
             </TableRow>
-          ))} */}
+          ))}
+
         </TableBody>
       </Table>
     </TableContainer>
@@ -118,5 +138,5 @@ export default function LivrosListagem() {
       </main>
     </div>
   );
-}
+};
 

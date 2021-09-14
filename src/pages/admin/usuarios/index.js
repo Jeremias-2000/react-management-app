@@ -73,6 +73,8 @@ export default function UsuarioListagem()  {
       }).catch(error => console.log(error))
   },[]) */
   
+    /* console.log('log user aqui',users.map(user =>)) */
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -107,9 +109,9 @@ export default function UsuarioListagem()  {
             <TableCell align="right">Opções</TableCell>
           </TableRow>
         </TableHead>
-
+        
         <TableBody>
-
+            
            {users.map((user) => (
             <TableRow key={user.userId}>
               <TableCell component="th" scope="row">
