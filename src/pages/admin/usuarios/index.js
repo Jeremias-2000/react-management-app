@@ -59,7 +59,7 @@ export default function UsuarioListagem()  {
    async function loadUsers(){
      const response = await userApi.get("/user/all")
     
-     setUsers([users, response.data])
+     setUsers(response.data.content)
      console.log(response.data)
    }
    loadUsers();
@@ -128,6 +128,7 @@ export default function UsuarioListagem()  {
               <TableCell >{user.district}</TableCell>
               <TableCell >{user.road}</TableCell>
               <TableCell >{user.houseNumber}</TableCell>
+
               <ButtonGroup> Atualizar</ButtonGroup>
               <ButtonGroup> Deletar</ButtonGroup>
             </TableRow>

@@ -59,7 +59,7 @@ export default function LivrosListagem()  {
    async function loadBooks(){
      const response = await userApi.get("/book/all")
     
-     setBooks([books, response.data])
+     setBooks( response.data.content)
      console.log(response.data)
    }
    loadBooks();
@@ -79,14 +79,14 @@ export default function LivrosListagem()  {
     <div className={classes.root}>
       <CssBaseline />
       
-      <MenuAdmin title={'Usuários'}/>
+      <MenuAdmin title={'Livros'}/>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
           <Grid item sm={12}>
           <Paper className={classes.paper} >
-            <h2>Listagem de Usuários</h2>
+            <h2>Listagem de Livros</h2>
             
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12}>
@@ -112,11 +112,11 @@ export default function LivrosListagem()  {
                   {book.bookId}
               </TableCell>
               
-              <TableCell >{book.name}</TableCell>
-              <TableCell >{book.author}</TableCell>
-              <TableCell >{book.genre}</TableCell>
-              <TableCell >{book.price}</TableCell>
-              <TableCell >{book.quantity}</TableCell>
+              <TableCell align="right">{book.name}</TableCell>
+              <TableCell align="right">{book.author}</TableCell>
+              <TableCell align="right">{book.genre}</TableCell>
+              <TableCell align="right">{book.price}</TableCell>
+              <TableCell align="right">{book.quantity}</TableCell>
 
               <ButtonGroup>Atualizar</ButtonGroup>
             </TableRow>
