@@ -101,11 +101,11 @@ export default function UsuarioListagem()  {
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">CPF</TableCell>
             <TableCell align="right">Cep</TableCell>
-            <TableCell align="right">Estado</TableCell>
-            <TableCell align="right">Cidade</TableCell>
+            <TableCell align="right">Logradouro</TableCell>
+            <TableCell align="right">Complemento</TableCell>
             <TableCell align="right">Bairro</TableCell>
-            <TableCell align="right">Rua</TableCell>
-            <TableCell align="right">Número</TableCell>
+            <TableCell align="right">Localidade</TableCell>
+            <TableCell align="right">DDD</TableCell>
             <TableCell align="right">Opções</TableCell>
           </TableRow>
         </TableHead>
@@ -122,12 +122,12 @@ export default function UsuarioListagem()  {
               <TableCell >{user.password}</TableCell>
               <TableCell >{user.email}</TableCell>
               <TableCell >{user.cpf}</TableCell>
-              <TableCell >{user.cep}</TableCell>
-              <TableCell >{user.state}</TableCell>
-              <TableCell >{user.city}</TableCell>
-              <TableCell >{user.district}</TableCell>
-              <TableCell >{user.road}</TableCell>
-              <TableCell >{user.houseNumber}</TableCell>
+              {/* <TableCell >{user.endereco.cep}</TableCell>
+              <TableCell >{user.endereco.logradouro}</TableCell>
+              <TableCell >{user.endereco.complemento}</TableCell>
+              <TableCell >{user.endereco.bairro}</TableCell>
+              <TableCell >{user.endereco.localidade}</TableCell>
+              <TableCell >{user.endereco.ddd}</TableCell> */}
 
               <ButtonGroup> Atualizar</ButtonGroup>
               <ButtonGroup> Deletar</ButtonGroup>
