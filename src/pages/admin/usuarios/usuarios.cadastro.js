@@ -48,24 +48,14 @@ export default function UsuarioCadastro() {
  const [email,setEmail] = useState('');
  const [cpf,setCpf] = useState('');
 
- /* nao vai dar certo essa linha abaixo tem que criar uma classe com construtor */
+
  const [cep,setCep] = useState('');
- const [state,setState] = useState('');
- const [city,setCity] = useState('');
- const [district,setDistrict] = useState('');
- const [road,setRoad] = useState('');
- const [houseNumber,setHouseNumber] = useState('');
+ 
 
 
  async function handleSubmit(){
 
-    const address= {cep: cep,
-                    state: state,
-                    city: city,
-                    district: district,
-                    road: road,
-                    houseNumber: houseNumber}
-                    
+    const address= {cep: cep}
     const data = {username: username
                 ,birthDay: birthDay
                 ,password: password
@@ -75,9 +65,9 @@ export default function UsuarioCadastro() {
 
                 console.log(data)   
                 
-        const response = await connection.post('/auth/signup',data); 
+        const response = await connection.post('/user/signup',data); 
         console.log(response.data)
-        if(response.status === 200){
+        if(response.status === 201){
           window.location.href= 'http://localhost:3000/admin/usuarios'
         }else{
           alert('Erro ao cadastrar novo usuário !');
@@ -187,65 +177,7 @@ export default function UsuarioCadastro() {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
-          <TextField id="state" 
-          name="state" 
-          label="State/Province/Region" 
-          fullWidth 
-          autoComplete="city"
-          value={state}
-          onChange={e => setState(e.target.value)}
-          />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="city"
-            value={city}
-            onChange={e => setCity(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="district"
-            name="district"
-            label="District"
-            fullWidth
-            autoComplete="district"
-            value={district}
-            onChange={e => setDistrict(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="road"
-            name="road"
-            label="Road"
-            fullWidth
-            autoComplete="road"
-            value={road}
-            onChange={e => setRoad(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} sm={3}>
-          <TextField
-            required
-            id="houseNumber"
-            name="houseNumber"
-            label="Number"
-            fullWidth
-            autoComplete="houseNumber"
-            value={houseNumber}
-            onChange={e => setHouseNumber(e.target.value)}
-          />
-        </Grid>
+        
         
         <Grid item xs={12} sm={12}>
                   <Button
