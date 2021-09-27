@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import  Paper  from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,7 +13,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import  ButtonGroup  from '@material-ui/core/ButtonGroup';
-
+import  Button  from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
@@ -75,6 +76,18 @@ export default function UsuarioListagem()  {
   
     /* console.log('log user aqui',users.map(user =>)) */
 
+    async function handleDelete(userId){
+        if(window.confirm("Você deseja realmente excluir este usuário ?")){
+            var result = await userApi.delete("/user/delete/id/"+ userId)
+
+            if(result.status === 200){
+              window.location.href = '/admin/usuarios';
+            }else{
+              alert("Ocorreu um erro")
+            }
+
+        }
+    }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -100,13 +113,14 @@ export default function UsuarioListagem()  {
             <TableCell align="right">Password</TableCell>
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">CPF</TableCell>
-            <TableCell align="right">Cep</TableCell>
+            <TableCell align="center">Opções</TableCell>
+           {/*  <TableCell align="right">Cep</TableCell>
             <TableCell align="right">Logradouro</TableCell>
             <TableCell align="right">Complemento</TableCell>
             <TableCell align="right">Bairro</TableCell>
             <TableCell align="right">Localidade</TableCell>
             <TableCell align="right">DDD</TableCell>
-            <TableCell align="right">Opções</TableCell>
+            <TableCell align="right">Opções</TableCell> */}
           </TableRow>
         </TableHead>
         
@@ -128,9 +142,14 @@ export default function UsuarioListagem()  {
               <TableCell >{user.endereco.bairro}</TableCell>
               <TableCell >{user.endereco.localidade}</TableCell>
               <TableCell >{user.endereco.ddd}</TableCell> */}
+              <TableCell align="right">
+              
+              <ButtonGroup color="primary" aria-label="outlined primary button group">
+                <Button variant="contained" color="primary" href= {"/admin/usuarios/editar/" + user.userId } >Atualizar</Button>
+                <Button variant="contained" color="secondary" onClick={() => handleDelete(user.userId)} >Deletar</Button>
+              </ButtonGroup>
 
-              <ButtonGroup> Atualizar</ButtonGroup>
-              <ButtonGroup> Deletar</ButtonGroup>
+              </TableCell>
             </TableRow>
           ))}
 

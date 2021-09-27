@@ -12,7 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import  ButtonGroup  from '@material-ui/core/ButtonGroup';
-
+import  Button  from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
@@ -100,6 +100,7 @@ export default function LivrosListagem()  {
             <TableCell align="right">Gênero</TableCell>
             <TableCell align="right">Preço</TableCell>
             <TableCell align="right">Quantidade</TableCell>
+            <TableCell align="center">Opções</TableCell>
           </TableRow>
         </TableHead>
 
@@ -118,7 +119,14 @@ export default function LivrosListagem()  {
               <TableCell align="right">{book.price}</TableCell>
               <TableCell align="right">{book.quantity}</TableCell>
 
-              <ButtonGroup>Atualizar</ButtonGroup>
+              <TableCell align="right">
+              
+              <ButtonGroup color="primary" aria-label="outlined primary button group">
+                <Button variant="contained" color="primary">Atualizar</Button>
+                <Button variant="contained" color="secondary">Deletar</Button>
+              </ButtonGroup>
+
+              </TableCell>
             </TableRow>
           ))}
 
